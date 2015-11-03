@@ -433,7 +433,7 @@ static const CGFloat MarginLeft = 20.0f;
     
     [self layoutCropRectViewWithCropRect:cropRect];
     
-    [self automaticZoomIfEdgeTouched:cropRect];
+//    [self automaticZoomIfEdgeTouched:cropRect];
 }
 
 - (void)cropRectViewDidEndEditing:(PECropRectView *)cropRectView
@@ -451,7 +451,7 @@ static const CGFloat MarginLeft = 20.0f;
     CGFloat width = CGRectGetWidth(toRect);
     CGFloat height = CGRectGetHeight(toRect);
     
-    CGFloat scale = MIN(CGRectGetWidth(self.editingRect) / width, CGRectGetHeight(self.editingRect) / height);
+    CGFloat scale = 1; MIN(CGRectGetWidth(self.editingRect) / width, CGRectGetHeight(self.editingRect) / height);
     
     CGFloat scaledWidth = width * scale;
     CGFloat scaledHeight = height * scale;
@@ -471,7 +471,7 @@ static const CGFloat MarginLeft = 20.0f;
     }
     
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        self.scrollView.bounds = cropRect;
+        self.scrollView.bounds = CGRectMake(self.scrollView.bounds.origin.x, self.scrollView.bounds.origin.y, cropRect.size.width, cropRect.size.height);
         [self.scrollView zoomToRect:zoomRect animated:NO];
         
         [self layoutCropRectViewWithCropRect:cropRect];
