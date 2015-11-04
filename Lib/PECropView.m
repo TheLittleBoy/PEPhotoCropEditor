@@ -471,9 +471,24 @@ static const CGFloat MarginLeft = 20.0f;
 //    }
     
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        self.scrollView.bounds = CGRectMake(zoomRect.origin.x * self.scrollView.zoomScale, zoomRect.origin.x * self.scrollView.zoomScale,
+        
+        NSLog(@"cropRect=====%f===%f===%f===%f", cropRect.origin.x, cropRect.origin.y, cropRect.size.width, cropRect.size.height);
+        NSLog(@"zoomRect===%f===%f===%f===%f", zoomRect.origin.x, zoomRect.origin.y, zoomRect.size.width, zoomRect.size.height);
+        
+        
+        self.scrollView.bounds = CGRectMake(zoomRect.origin.x * self.scrollView.zoomScale, zoomRect.origin.y * self.scrollView.zoomScale,
                                             cropRect.size.width, cropRect.size.height);
+        
+        
+        NSLog(@"self.scrollView11111===%f===%f", self.scrollView.contentOffset.x, self.scrollView.contentOffset.y);
+        
+        
+        
         [self.scrollView zoomToRect:zoomRect animated:NO];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSLog(@"self.scrollView===%f===%f", self.scrollView.contentOffset.x, self.scrollView.contentOffset.y);
+        });
+        
         
         [self layoutCropRectViewWithCropRect:cropRect];
     } completion:NULL];
