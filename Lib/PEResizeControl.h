@@ -15,6 +15,7 @@
 
 @property (nonatomic, weak) id<PEResizeControlViewDelegate> delegate;
 @property (nonatomic, readonly) CGPoint translation;
+@property (nonatomic) BOOL handlePanGestureEnable;
 
 @end
 

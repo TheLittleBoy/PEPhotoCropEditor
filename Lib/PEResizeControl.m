@@ -12,6 +12,7 @@
 
 @property (nonatomic, readwrite) CGPoint translation;
 @property (nonatomic) CGPoint startPoint;
+@property (nonatomic, strong)UIPanGestureRecognizer * gestureRecognizer;
 
 @end
 
@@ -24,11 +25,19 @@
         self.backgroundColor = [UIColor clearColor];
         self.exclusiveTouch = YES;
         
-        UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        [self addGestureRecognizer:gestureRecognizer];
+        self.gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        [self addGestureRecognizer:self.gestureRecognizer];
     }
     
     return self;
+}
+
+- (void)setHandlePanGestureEnable:(BOOL)handlePanGestureEnable
+{
+    _handlePanGestureEnable = handlePanGestureEnable;
+    
+    self.gestureRecognizer.enabled = handlePanGestureEnable;
+    self.exclusiveTouch = handlePanGestureEnable;
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer

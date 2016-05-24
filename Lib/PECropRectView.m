@@ -73,6 +73,8 @@
         self.rightEdgeView = [[PEResizeControl alloc] init];
         self.rightEdgeView.delegate = self;
         [self addSubview:self.rightEdgeView];
+        
+        self.edgeViewGestureEnable = NO;
     }
     
     return self;
@@ -84,7 +86,7 @@
 {
     NSArray *subviews = self.subviews;
     for (UIView *subview in subviews) {
-        if ([subview isKindOfClass:[PEResizeControl class]]) {
+        if ([subview isKindOfClass:[PEResizeControl class]] && subview.hidden == NO) {
             if (CGRectContainsPoint(subview.frame, point)) {
                 return subview;
             }
@@ -164,6 +166,21 @@
         CGFloat height = CGRectGetHeight(self.bounds);
         self.fixedAspectRatio = fminf(width / height, height / width);
     }
+}
+
+- (void)setEdgeViewGestureEnable:(BOOL)edgeViewGestureEnable
+{
+    _edgeViewGestureEnable = edgeViewGestureEnable;
+    
+    [self.topEdgeView setHandlePanGestureEnable:edgeViewGestureEnable];
+    [self.leftEdgeView setHandlePanGestureEnable:edgeViewGestureEnable];
+    [self.bottomEdgeView setHandlePanGestureEnable:edgeViewGestureEnable];
+    [self.rightEdgeView setHandlePanGestureEnable:edgeViewGestureEnable];
+    
+    [self.topEdgeView setHidden:!edgeViewGestureEnable];
+    [self.leftEdgeView setHidden:!edgeViewGestureEnable];
+    [self.bottomEdgeView setHidden:!edgeViewGestureEnable];
+    [self.rightEdgeView setHidden:!edgeViewGestureEnable];
 }
 
 #pragma mark -

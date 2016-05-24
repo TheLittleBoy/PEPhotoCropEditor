@@ -81,6 +81,7 @@ static const CGFloat MarginLeft = 20.0f;
     
     self.cropRectView = [[PECropRectView alloc] init];
     self.cropRectView.delegate = self;
+    //self.cropRectView.edgeViewGestureEnable = YES;
     [self addSubview:self.cropRectView];
     
     self.topOverlayView = [[UIView alloc] init];

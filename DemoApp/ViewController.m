@@ -24,6 +24,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.imageView.image = [UIImage imageNamed:@"tt"];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -74,6 +77,8 @@
                                           (height - length) / 2,
                                           length,
                                           length);
+    
+    controller.keepingCropAspectRatio = YES;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
     
